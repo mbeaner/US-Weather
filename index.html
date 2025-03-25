@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Temperature by State</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Average Temperature by State</h1>
+            <div class="date-container">
+                <span>Delivery Date: </span>
+                <input type="date" id="date-picker">
+            </div>
+        </div>
+    </header>
+    <div id="map-container">
+        <svg id="us-map"></svg>
+    </div>
+    <button id="print-btn">Print Map</button>
+    <script src="script.js"></script>
+</body>
+</html>
