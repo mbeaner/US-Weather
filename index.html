@@ -16,6 +16,16 @@
                 <span>Delivery Date: </span>
                 <input type="date" id="date-picker">
             </div>
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="dark-mode-switch">
+                <label for="dark-mode-switch">
+                    <span class="toggle-icon">
+                        <span class="moon">🌙</span>
+                        <span class="sun">☀️</span>
+                    </span>
+                    <span class="toggle-text">Dark Mode</span>
+                </label>
+            </div>
         </div>
     </header>
     <div id="map-container">
@@ -39,10 +49,7 @@
         </div>
     </div>
     <button id="print-btn">Print Map</button>
-    <!-- Optional: For debugging -->
-    <button id="clear-storage" style="position: fixed; bottom: 1rem; left: 1rem; z-index: 100; display: none;">
-        Clear Saved Data
-    </button>
+    <button id="clear-storage">Clear Saved Data</button>
     <script src="script.js"></script>
 </body>
 </html>
