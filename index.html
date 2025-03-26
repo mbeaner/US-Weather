@@ -21,7 +21,28 @@
     <div id="map-container">
         <svg id="us-map"></svg>
     </div>
+    <div class="legend">
+        <div class="legend-title">Temperature Ranges</div>
+        <div class="legend-items">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e74c3c;"></div>
+                <span class="legend-label">Summer (70°F or above)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #3498db;"></div>
+                <span class="legend-label">Winter (69°F or below)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #f0f0f0;"></div>
+                <span class="legend-label">No data selected</span>
+            </div>
+        </div>
+    </div>
     <button id="print-btn">Print Map</button>
+    <!-- Optional: For debugging -->
+    <button id="clear-storage" style="position: fixed; bottom: 1rem; left: 1rem; z-index: 100; display: none;">
+        Clear Saved Data
+    </button>
     <script src="script.js"></script>
 </body>
 </html>
