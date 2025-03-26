@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // Enhanced dark mode toggle functionality
+  const darkModeSwitch = document.getElementById('dark-mode-switch');
+  const toggleText = document.querySelector('.toggle-text');
+
+  // Check for saved dark mode preference
+  if (localStorage.getItem('darkMode') === 'true') {
+    darkModeSwitch.checked = true;
+    document.body.classList.add('dark-mode');
+    toggleText.textContent = 'Light Mode';
+  }
+
+  darkModeSwitch.addEventListener('change', function () {
+    const isDarkMode = this.checked;
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    localStorage.setItem('darkMode', isDarkMode);
+    toggleText.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+
+    // Force redraw of SVG elements
+    const abbrs = document.querySelectorAll('.state-abbr');
+    abbrs.forEach((abbr) => {
+      abbr.style.display = 'none';
+      abbr.offsetHeight; // Trigger reflow
+      abbr.style.display = null;
+    });
+  });
+
   // Show loading message
   const loadingMessage = document.createElement('div');
   loadingMessage.className = 'loading-message';
@@ -16,12 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
     window.print();
   });
 
-  // Debugging button to clear storage
+  // Clear storage button functionality
   document
     .getElementById('clear-storage')
     .addEventListener('click', function () {
-      localStorage.removeItem('stateColors');
-      alert('Saved colors cleared! Refresh the page.');
+      if (confirm('Are you sure you want to clear all saved data?')) {
+        localStorage.removeItem('stateColors');
+        alert('Saved data cleared! Refreshing the page...');
+        setTimeout(() => location.reload(), 1000);
+      }
     });
 
   // Map dimensions
@@ -184,16 +213,15 @@ document.addEventListener('DOMContentLoaded', function () {
           const isSmallState = smallStates.includes(abbr);
 
           if (isSmallState) {
-            const distance = 60;
-            let angle = 0; // East by default
+            const distance = 80;
+            let angle = 0;
             let distanceMultiplier = 1;
 
-            // Custom angles and distances for specific states
             const stateAdjustments = {
-              NH: { angle: Math.PI / 12, distanceMultiplier: 1.1 }, // 30° SE
-              RI: { angle: Math.PI / 6, distanceMultiplier: 1.1 }, // 30° SE
-              CT: { angle: Math.PI / 6, distanceMultiplier: 1 }, // 22.5° SE
-              MD: { angle: Math.PI / 12, distanceMultiplier: 1 }, // 15° SE
+              NH: { angle: Math.PI / 11, distanceMultiplier: 1.1 },
+              RI: { angle: Math.PI / 6, distanceMultiplier: 1.1 },
+              CT: { angle: Math.PI / 6, distanceMultiplier: 1 },
+              MD: { angle: Math.PI / 12, distanceMultiplier: 1 },
             };
 
             if (stateAdjustments[abbr]) {
@@ -205,18 +233,31 @@ document.addEventListener('DOMContentLoaded', function () {
             const textX = centroid[0] + Math.cos(angle) * adjustedDistance;
             const textY = centroid[1] + Math.sin(angle) * adjustedDistance;
 
-            // Add connecting line
             group
               .append('line')
               .attr('x1', centroid[0])
               .attr('y1', centroid[1])
               .attr('x2', textX)
               .attr('y2', textY)
-              .attr('stroke', '#555')
-              .attr('stroke-width', 0.8)
-              .attr('stroke-dasharray', '3,2');
+              .attr('stroke', function () {
+                return document.body.classList.contains('dark-mode')
+                  ? '#f1c40f' // Changed to yellow for better visibility
+                  : '#555';
+              })
+              .attr('stroke-width', function () {
+                return document.body.classList.contains('dark-mode') ? 1 : 0.8;
+              })
+              .attr('stroke-dasharray', function () {
+                return document.body.classList.contains('dark-mode')
+                  ? '4,3'
+                  : '3,2';
+              })
+              .attr('opacity', function () {
+                return document.body.classList.contains('dark-mode')
+                  ? 0.9
+                  : 0.7;
+              });
 
-            // Add text
             group
               .append('text')
               .attr('class', 'state-abbr')
@@ -253,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
     projection.translate([newWidth / 2, newHeight / 2]).scale(newWidth);
     svg.selectAll('.state').attr('d', path);
 
-    // Update state abbreviations and lines with custom angles
+    // Update state abbreviations and lines
     svg.selectAll('.state-abbr-container').each(function (d) {
       const group = d3.select(this);
       const stateName = d.properties.name;
@@ -269,12 +310,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!abbr || !smallStates.includes(abbr)) return;
 
       const centroid = path.centroid(d);
-      const distance = 60;
+      const distance = 80;
       let angle = 0;
       let distanceMultiplier = 1;
 
       const stateAdjustments = {
-        NH: { angle: Math.PI / 12, distanceMultiplier: 1.1 },
+        NH: { angle: Math.PI / 10, distanceMultiplier: 1.1 },
         RI: { angle: Math.PI / 6, distanceMultiplier: 1.1 },
         CT: { angle: Math.PI / 6, distanceMultiplier: 1 },
         MD: { angle: Math.PI / 12, distanceMultiplier: 1 },
@@ -294,7 +335,21 @@ document.addEventListener('DOMContentLoaded', function () {
         .attr('x1', centroid[0])
         .attr('y1', centroid[1])
         .attr('x2', textX)
-        .attr('y2', textY);
+        .attr('y2', textY)
+        .attr('stroke', function () {
+          return document.body.classList.contains('dark-mode')
+            ? '#f1c40f' // Changed to yellow for better visibility
+            : '#555';
+        })
+        .attr('stroke-width', function () {
+          return document.body.classList.contains('dark-mode') ? 1 : 0.8;
+        })
+        .attr('stroke-dasharray', function () {
+          return document.body.classList.contains('dark-mode') ? '4,3' : '3,2';
+        })
+        .attr('opacity', function () {
+          return document.body.classList.contains('dark-mode') ? 0.9 : 0.7;
+        });
 
       group.select('text').attr('x', textX).attr('y', textY);
     });
