@@ -6,6 +6,7 @@
   --light-gray: #ecf0f1;
   --dark-gray: #7f8c8d;
   --text-color: #333;
+  --text-color-rgb: 51, 51, 51;
   --white: #fff;
   --header-blue: #2980b9;
   --bg-color: #fff;
@@ -38,6 +39,7 @@
   --light-gray: #2c3e50;
   --dark-gray: #95a5a6;
   --text-color: #ecf0f1;
+  --text-color-rgb: 236, 240, 241;
   --white: #2c3e50;
   --header-blue: #3498db;
   --bg-color: #1a2634;
@@ -46,7 +48,7 @@
   --state-stroke: #4a6278;
   --abbr-text: #ecf0f1;
   --abbr-shadow: rgba(0, 0, 0, 0.7);
-  --connector-line: #f1c40f; /* Changed to yellow for better visibility */
+  --connector-line: #f1c40f;
   --connector-opacity: 0.9;
 
   /* Header specific */
@@ -251,19 +253,19 @@ h1 {
 .state-abbr-container line {
   pointer-events: none;
   stroke: var(--connector-line);
-  stroke-width: 0.8px;
-  stroke-dasharray: 3, 2;
+  stroke-width: 2px;
+  stroke-dasharray: 6, 4;
   opacity: var(--connector-opacity);
   transition: all 0.3s ease;
 }
 
 .dark-mode .state-abbr-container line {
-  stroke-width: 1px;
-  stroke-dasharray: 4, 3;
+  stroke-width: 3px;
+  stroke-dasharray: 8, 6;
 }
 
 .state-abbr {
-  font-size: 0.85rem;
+  font-size: 1.275rem;
   font-weight: 700;
   pointer-events: none;
   text-anchor: middle;
@@ -272,6 +274,66 @@ h1 {
   dominant-baseline: middle;
   text-shadow: 1px 1px 2px var(--abbr-shadow), -1px -1px 2px var(--abbr-shadow),
     1px -1px 2px var(--abbr-shadow), -1px 1px 2px var(--abbr-shadow);
+}
+
+/* Enhanced Tooltip Styles */
+.tooltip {
+  position: absolute;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-color);
+}
+
+.dark-mode .tooltip {
+  background: rgba(30, 30, 40, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  border-bottom: 1px solid rgba(var(--text-color-rgb), 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.tooltip-city,
+.tooltip-temp {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin: 0.3rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-city::before {
+  content: '📍';
+  margin-right: 6px;
+  font-size: 0.8rem;
+}
+
+.tooltip-temp::before {
+  content: '🌡️';
+  margin-right: 6px;
+  font-size: 0.8rem;
+}
+
+.tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #print-btn {
@@ -443,19 +505,20 @@ h1 {
   }
 
   #print-btn,
-  #clear-storage {
+  #clear-storage,
+  .tooltip {
     display: none !important;
   }
 
   .state-abbr-container line {
     stroke: #000 !important;
-    stroke-width: 0.6px !important;
-    stroke-dasharray: 2, 1 !important;
+    stroke-width: 1.8px !important;
+    stroke-dasharray: 6, 3 !important;
     opacity: 1 !important;
   }
 
   .state-abbr {
-    font-size: 8pt !important;
+    font-size: 12pt !important;
     fill: #000 !important;
     font-weight: 600 !important;
     text-shadow: none !important;
@@ -494,4 +557,22 @@ h1 {
     size: landscape;
     margin: 0.5cm;
   }
+}
+.unlock-text {
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.explosion circle {
+  mix-blend-mode: screen;
 }
