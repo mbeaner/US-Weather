@@ -34,8 +34,8 @@
 /* Dark mode variables */
 .dark-mode {
   --primary-color: #1a2634;
-  --secondary-color: #7eb8d1;
-  --accent-color: #ff6b6b;
+  --secondary-color: #2980b9;
+  --accent-color: #ff8a8a;
   --light-gray: #2c3e50;
   --dark-gray: #95a5a6;
   --text-color: #ecf0f1;
@@ -557,22 +557,4 @@ h1 {
     size: landscape;
     margin: 0.5cm;
   }
-}
-.unlock-text {
-  font-weight: bold;
-  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-  animation: pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse {
-  from {
-    opacity: 0.7;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.explosion circle {
-  mix-blend-mode: screen;
 }
