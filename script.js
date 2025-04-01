@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   // Color sequence
-  const colors = ['#f0f0f0', '#a8d8ea', '#e74c3c'];
+  const colors = ['#f0f0f0', '#a8d8ea', '#ff6b6b'];
   let temperatureData = {};
 
   // Enhanced Tooltip setup
