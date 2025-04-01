@@ -2,7 +2,7 @@
   /* Light mode variables */
   --primary-color: #2c3e50;
   --secondary-color: #a8d8ea;
-  --accent-color: #e74c3c;
+  --accent-color: #ff6b6b;
   --light-gray: #ecf0f1;
   --dark-gray: #7f8c8d;
   --text-color: #333;
@@ -35,7 +35,7 @@
 .dark-mode {
   --primary-color: #1a2634;
   --secondary-color: #7eb8d1;
-  --accent-color: #e74c3c;
+  --accent-color: #ff6b6b;
   --light-gray: #2c3e50;
   --dark-gray: #95a5a6;
   --text-color: #ecf0f1;
