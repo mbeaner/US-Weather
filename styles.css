@@ -558,3 +558,126 @@ h1 {
     margin: 0.5cm;
   }
 }
+
+/* ====================== */
+/* Simplified Loading Styles */
+/* ====================== */
+.prescription-loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  font-family: 'Arial', sans-serif;
+}
+
+.dark-mode .prescription-loading-container {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.prescription-bottle {
+  width: 120px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.bottle-body {
+  position: absolute;
+  width: 100%;
+  height: 85%;
+  bottom: 0;
+  background: #e0f7fa;
+  border-radius: 8px 8px 2px 2px;
+  border: 2px solid #4dd0e1;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bottle-neck {
+  position: absolute;
+  width: 30%;
+  height: 10%;
+  top: 0;
+  left: 35%;
+  background: #e0f7fa;
+  border-radius: 5px 5px 0 0;
+  border: 2px solid #4dd0e1;
+  border-bottom: none;
+}
+
+.bottle-cap {
+  position: absolute;
+  width: 40%;
+  height: 6%;
+  top: -6%;
+  left: 30%;
+  background: #e91e63;
+  border-radius: 3px 3px 0 0;
+  border: 2px solid #c2185b;
+}
+
+.liquid-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to top, #4dd0e1, #00acc1);
+  transition: height 0.5s ease-out;
+  z-index: 1;
+}
+
+.rx-symbol {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #e91e63;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.loading-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dark-mode .loading-text {
+  color: #ecf0f1;
+}
+
+.loading-details {
+  font-size: 1rem;
+  color: #7f8c8d;
+  max-width: 300px;
+  text-align: center;
+}
+
+.dark-mode .loading-details {
+  color: #bdc3c7;
+}
+
+.progress-percent {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #2c3e50;
+  font-family: 'Courier New', monospace;
+}
+
+.dark-mode .progress-percent {
+  color: #ecf0f1;
+}
